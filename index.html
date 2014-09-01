@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Namen Leren</title>
+    <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+
+    <script src="studenten.js"></script>
+    <script src="namenleren.js"></script>
+    <style>
+    body {
+      text-align: center;
+    }
+
+    #foto {
+      width: 300px;
+      margin: 10pt;
+      position: relative;
+      font-size: 100px;
+      font-weight: bold;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #foto img {
+      width: 100%;
+    }
+
+    #verberger {
+      position: absolute;
+      background-color: gray;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 45%;
+    }
+
+    #naam {
+      font-size: 2.0em;
+      padding: 0.2em;
+      width: 50%;
+      text-align: center;
+    }
+
+    #correct {
+      color: green;
+      display: none;
+    }
+
+    #helaas {
+      color: red;
+      display: none;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="foto">
+      <img>
+      <div id="verberger">?</div>
+    </div>
+
+    <input type="text" id="naam" autofocus>
+    <h1 id="correct">Correct!</h1>
+    <h1 id="helaas">Helaas!</h1>
+
+  </body>
+</html>
