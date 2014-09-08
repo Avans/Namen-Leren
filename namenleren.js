@@ -1,6 +1,10 @@
-$(function() {
+var file = window.location.hash.substring(1);
+if(!file) {
+  file = 'studenten2014';
+}
+console.log(file + '.js');
+$.getScript(file + '.js', function() {
   var student;
-  var testing = false;
 
   $('#naam').autocomplete({
       source: function(request, response) {
@@ -22,7 +26,7 @@ $(function() {
             feedback = $('#helaas');
           }
           feedback.fadeIn().fadeOut();
-        }}).delay(2000).fadeIn({complete: function() {
+        }}).delay(1000).fadeIn({complete: function() {
           nieuwenaam();
           $('#naam').val('');
         }});
@@ -35,13 +39,21 @@ $(function() {
     student = studenten[Math.floor(Math.random() * studenten.length)];
 
     $('#foto img').attr('src', student.foto)
+
+    var points = '';
+    for(i in student.vierkant) {
+      points += student.vierkant[i][0] + ',' + student.vierkant[i][1] + ' ';
+    }
+
+    $('svg')[0].setAttribute('viewBox', '0 0 ' + student.grootte[0] + ' ' + student.grootte[1]);
+    $('#vierkant').attr('points', points);
   }
 
   nieuwenaam();
 
   $('#naam').keypress(function(e) {
     if(e.which == 13) {
-      $('#verberger').fadeOut().delay(2000).fadeIn({complete: function() {
+      $('#verberger').fadeOut().delay(1300).fadeIn({complete: function() {
         nieuwenaam();
       }});
     }

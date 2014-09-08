@@ -7,11 +7,11 @@
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
 
-    <script src="studenten.js"></script>
     <script src="namenleren.js"></script>
     <style>
     body {
       text-align: center;
+      margin-bottom: 50px;
     }
 
     #foto {
@@ -29,12 +29,11 @@
     }
 
     #verberger {
-      position: absolute;
-      background-color: gray;
-      bottom: 0;
+      top: 0;
       left: 0;
-      right: 0;
-      height: 45%;
+      position: absolute;
+      height: 100%;
+      width: 100%;
     }
 
     #naam {
@@ -53,12 +52,15 @@
       color: red;
       display: none;
     }
+
     </style>
   </head>
   <body>
     <div id="foto">
       <img>
-      <div id="verberger">?</div>
+      <svg id="verberger">
+        <polygon id="vierkant" points="200,10 250,190 160,210" style="fill:white" />
+      </svg>
     </div>
 
     <input type="text" id="naam" autofocus>
