@@ -1,7 +1,11 @@
-import glob, os.path, cv2, time, numpy as np, math, json
+import glob, os.path, cv2, time, numpy as np, math, json, csv
+from unidecode import unidecode
+
+year = 2014
+studenten_groepen = list(csv.reader(open('studenten%s.csv' % year), delimiter=';'))
 
 studenten = []
-for file in glob.glob('studenten2013/*.JPG')[:]:
+for file in glob.glob('studenten%s/*.JPG' % year)[:]:
     image = cv2.imread(file)
     image_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
@@ -38,6 +42,12 @@ for file in glob.glob('studenten2013/*.JPG')[:]:
     parts[-1], parts[0] = parts[0], parts[-1]
     naam = ' '.join(parts)
 
+    # Zoek een groep
+    groep = ''
+    for student in studenten_groepen:
+        if(unidecode(student[1].decode('utf-8')) == parts[0] and unidecode(student[3].decode('utf-8')) == parts[-1]):
+            groep = student[4]
+
     if len(squares) > 0:
         vierkant = []
         for point in squares[0]:
@@ -47,6 +57,12 @@ for file in glob.glob('studenten2013/*.JPG')[:]:
         half_height = height * 0.5
         vierkant = [[0, half_height], [width, half_height], [width, height], [0, height]]
 
-    studenten.append({'naam': naam, 'foto': file, 'vierkant': vierkant, 'grootte': [image.shape[1], image.shape[0]]})
+    studenten.append({'naam': naam, 'foto': file, 'vierkant': vierkant, 'grootte': [image.shape[1], image.shape[0]], 'groep': groep})
 
-print 'var studenten = ', studenten, ';'
+file = 'var studenten = ' + str(studenten) + ';'
+
+f = open('studenten%s.js' % year, 'w')
+f.write(file)
+f.close()
+
+print file

@@ -2,8 +2,62 @@ var file = window.location.hash.substring(1);
 if(!file) {
   file = 'studenten2014';
 }
-console.log(file + '.js');
+
 $.getScript(file + '.js', function() {
+  var groepen = {};
+  var selected_studenten = [];
+  var raad_index = 0;
+
+  for(i in studenten) {
+    var groep = studenten[i].groep;
+    if(groep.trim() == "")
+      groep = "Onbekend";
+
+    if(!groepen[groep])
+      groepen[groep] = [];
+
+    groepen[groep].push(studenten[i]);
+
+  }
+  console.log(groepen);
+  groepen_sorted = Object.keys(groepen).sort();
+
+  for(i in groepen_sorted) {
+    var groep = groepen_sorted[i];
+    $('#groepen').append(groep + ' <input type="checkbox" id="'+groep+'" class="groep" checked="checked"><br />');
+    $('#' + groep).change(function() {
+      reselect_studenten();
+    });
+  };
+
+  $('#all').change(function() {
+    $('.groep').prop('checked', $(this).prop('checked'));
+    reselect_studenten();
+  });
+
+  function shuffleArray(array) {
+      for (var i = array.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+      }
+      return array;
+  }
+
+  function reselect_studenten() {
+    selected_studenten = [];
+    $(".groep:checked").each(function(i, checkbox) {
+      $(groepen[checkbox.id]).each(function(i, student) {
+        selected_studenten.push(student);
+      });
+    });
+    shuffleArray(selected_studenten);
+
+    nieuwenaam();
+  }
+
+
   var student;
 
   $('#naam').autocomplete({
@@ -26,7 +80,7 @@ $.getScript(file + '.js', function() {
             feedback = $('#helaas');
           }
           feedback.fadeIn().fadeOut();
-        }}).delay(1000).fadeIn({complete: function() {
+        }}).delay(400).fadeIn({complete: function() {
           nieuwenaam();
           $('#naam').val('');
         }});
@@ -36,7 +90,14 @@ $.getScript(file + '.js', function() {
     });
 
   function nieuwenaam() {
-    student = studenten[Math.floor(Math.random() * studenten.length)];
+    if(selected_studenten.length == 0) {
+      $('#foto img').attr('src', '');
+      student = undefined;
+      return;
+    }
+
+    raad_index++;
+    student = selected_studenten[raad_index % selected_studenten.length];
 
     $('#foto img').attr('src', student.foto)
 
@@ -49,11 +110,11 @@ $.getScript(file + '.js', function() {
     $('#vierkant').attr('points', points);
   }
 
-  nieuwenaam();
+  reselect_studenten();
 
   $('#naam').keypress(function(e) {
     if(e.which == 13) {
-      $('#verberger').fadeOut().delay(1300).fadeIn({complete: function() {
+      $('#verberger').fadeOut().delay(300).fadeIn({complete: function() {
         nieuwenaam();
       }});
     }
