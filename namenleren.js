@@ -97,6 +97,9 @@ $.getScript(file + '.js', function() {
     }
 
     raad_index++;
+    if(raad_index % selected_studenten.length == 0) {
+      shuffleArray(selected_studenten);
+    }
     student = selected_studenten[raad_index % selected_studenten.length];
 
     $('#foto img').attr('src', student.foto)
