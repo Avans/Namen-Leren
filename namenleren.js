@@ -71,6 +71,21 @@ $.getScript(file + '.js', function() {
         response(result);
       },
       delay: 0,
+      focus: function(event, ui) {
+        console.log(event, ui);
+        // Find student
+        for(id in studenten) {
+          if(studenten[id].naam == ui.item.value) {
+            $('#helper').show().attr('src', studenten[id].foto);
+          }
+        }
+      },
+      change: function(event, ui) {
+        $('#helper').attr('src','').hide();
+      },
+      close: function(event, ui) {
+        $('#helper').attr('src', '').hide();
+      },
       select: function( event, ui ) {
         $('#verberger').fadeOut({complete: function() {
           var feedback;

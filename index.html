@@ -63,6 +63,20 @@
       background-color: #fffec1;
     }
 
+    #helper {
+      position: absolute;
+      top: -130px;
+      left: 0;
+      width: 130px;
+
+      transition: 0.2s ease-in-out;
+      z-index: 200;
+    }
+
+    #helper:hover {
+      transform: scale(2);
+    }
+
     </style>
   </head>
   <body>
@@ -76,7 +90,9 @@
       </svg>
     </div>
 
-    <input type="text" id="naam" autofocus>
+    <input type="text" id="naam" autofocus><span style="position: relative;"><img id="helper"></span>
+
+
     <h1 id="correct">Correct!</h1>
     <h1 id="helaas">Helaas!</h1>
 
