@@ -45,7 +45,7 @@ for file in glob.glob('studenten%s/*.JPG' % year)[:]:
     # Zoek een groep
     groep = ''
     for student in studenten_groepen:
-        if(unidecode(student[1].decode('utf-8')) == parts[0] and unidecode(student[3].decode('utf-8')) == parts[-1]):
+        if(unidecode(student[3].decode('utf-8')) == parts[0] and unidecode(student[1].decode('utf-8')) == parts[-1]):
             groep = student[4]
 
     if len(squares) > 0:
