@@ -1,6 +1,6 @@
 var file = window.location.hash.substring(1);
 if(!file) {
-  file = 'studenten2014';
+  file = 'studenten2016';
 }
 
 $.getScript(file + '.js', function() {
