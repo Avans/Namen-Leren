@@ -1,7 +1,7 @@
 import glob, os.path, cv2, time, numpy as np, math, json, csv
 from unidecode import unidecode
 
-year = 2016
+year = 2017
 studenten_groepen = list(csv.reader(open('studenten%s.csv' % year), delimiter=';'))
 
 studenten = []
@@ -18,11 +18,12 @@ for file in glob.glob('studenten%s/*' % year)[:]:
     white = cv2.erode(white, np.ones((10, 10),np.uint8))
 
     white_copy = white.copy()
-    contours, hierarchy = cv2.findContours(white_copy, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE);
+
+    something, contours, hierarchy = cv2.findContours(white_copy, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
     squares = []
     for contour in contours:
-        approx = cv2.approxPolyDP(contour, cv2.arcLength(contour, True)*0.09, True);
+        approx = cv2.approxPolyDP(contour, cv2.arcLength(contour, True)*0.09, True)
 
         area_percent = math.fabs(cv2.contourArea(approx) / (image.shape[0] * image.shape[1]))
 
