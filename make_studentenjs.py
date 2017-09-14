@@ -6,6 +6,9 @@ studenten_groepen = list(csv.reader(open('studenten%s.csv' % year), delimiter=';
 
 studenten = []
 for file in glob.glob('studenten%s/*' % year)[:]:
+    if file.endswith('.log'):
+        continue
+
     image = cv2.imread(file)
     white = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
