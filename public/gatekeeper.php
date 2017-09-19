@@ -16,9 +16,9 @@ if (array_key_exists('token_credentials', $_SESSION)) {
         exit(1);
     }
     $tokenCredentials = unserialize($_SESSION['token_credentials']);
-    $user = $server->getUserDetails($tokenCredentials);
     $protected_location = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'protected';
     if ($_GET['_p'] === '') {
+        $user = $server->getUserDetails($tokenCredentials);
         include $protected_location . DIRECTORY_SEPARATOR . 'index.html';
         exit;
     } elseif ($_GET['_p'] === 'logout') {
