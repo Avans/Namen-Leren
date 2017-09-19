@@ -3,13 +3,7 @@
 require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Avans.php';
 
-$secrets = require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'sso.php';
-
-$server = new  Avans\NamenLeren\Avans([
-    'identifier' => $secrets['key'],
-    'secret' => $secrets['secret'],
-    'callback_uri' => $secrets['redirect_uri']
-]);
+$server = require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'sso.php';
 
 session_start();
 
@@ -39,108 +33,19 @@ if (array_key_exists('token_credentials', $_SESSION)) {
     // here's basic user information.
     $user = $server->getUserDetails($tokenCredentials);
 
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Namen Leren</title>
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-
-    <script src="namenleren.js"></script>
-    <style>
-        body {
-            text-align: center;
-            margin-bottom: 50px;
+    $protected_location = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'protected';
+    if ($_GET['_p'] === '') {
+        include $protected_location . DIRECTORY_SEPARATOR . 'index.html';
+    } else {
+        $path = str_replace(['../','./'], '', $_GET['_p']);
+        $filename = $protected_location . DIRECTORY_SEPARATOR . $path;
+        if (!file_exists($filename)) {
+            http_response_code(404);
+            exit('File not found');
         }
-
-        #foto {
-            width: 40%;
-            margin: 10pt;
-            position: relative;
-            font-size: 100px;
-            font-weight: bold;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        #foto img {
-            width: 100%;
-        }
-
-        #verberger {
-            top: 0;
-            left: 0;
-            position: absolute;
-            height: 100%;
-            width: 100%;
-        }
-
-        #naam {
-            font-size: 2.0em;
-            padding: 0.2em;
-            width: 50%;
-            text-align: center;
-        }
-
-        #correct {
-            color: green;
-            display: none;
-        }
-
-        #helaas {
-            color: red;
-            display: none;
-        }
-
-        #groepen {
-            width: 150px;
-            position: fixed;
-            top: 0;
-            right: 0;
-            text-align: right;
-            padding: 10px;
-            background-color: #fffec1;
-        }
-
-        #helper {
-            position: absolute;
-            top: -130px;
-            left: 0;
-            width: 130px;
-
-            transition: 0.2s ease-in-out;
-            z-index: 200;
-        }
-
-        #helper:hover {
-            transform: scale(2);
-        }
-
-    </style>
-</head>
-<body>
-<div id="groepen">
-    Iedereen <input type="checkbox" id="all" checked="checked"><br />
-</div>
-<div id="foto">
-    <img>
-    <svg id="verberger">
-        <polygon id="vierkant" points="200,10 250,190 160,210" style="fill:white" />
-    </svg>
-</div>
-
-<input type="text" id="naam" autofocus><span style="position: relative;"><img id="helper"></span>
-
-
-<h1 id="correct">Correct!</h1>
-<h1 id="helaas">Helaas!</h1>
-
-</body>
-</html>
-<?php
+        header('Content-Type: ' . mime_content_type($filename));
+        include $filename;
+    }
 
 
 // Step 3

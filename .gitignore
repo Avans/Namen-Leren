@@ -1,4 +1,4 @@
 .DS_Store
-/public/studenten*
+/protected/studenten*
 sso.php
 vendor
