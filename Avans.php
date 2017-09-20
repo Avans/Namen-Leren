@@ -63,6 +63,7 @@ class Avans extends \League\OAuth1\Client\Server\Server {
         $user->name = $data['accounts']['username'];
         $user->firstName = $data['name']['givenName'];
         $user->lastName = $data['name']['familyName'];
+        $user->extra['employee'] = $data['employee'];
         return $user;
     }
 

@@ -17,12 +17,22 @@ if (array_key_exists('token_credentials', $_SESSION)) {
     }
     $tokenCredentials = unserialize($_SESSION['token_credentials']);
     $protected_location = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'protected';
+    if (array_key_exists('user', $_SESSION) === false) {
+        $_SESSION['user'] = serialize($server->getUserDetails($tokenCredentials));
+    }
+    $user = unserialize($_SESSION['user']);
+    if ($user->extra['employee'] === false) {
+        http_response_code(403);
+        exit('Forbidden');
+    }
+
     if ($_GET['_p'] === '') {
-        $user = $server->getUserDetails($tokenCredentials);
         include $protected_location . DIRECTORY_SEPARATOR . 'index.html';
         exit;
     } elseif ($_GET['_p'] === 'logout') {
         unset($_SESSION['token_credentials']);
+        unset($_SESSION['user']);
+        session_destroy();
         header("Location: /");
         exit;
     }
