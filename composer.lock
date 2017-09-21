@@ -4,8 +4,48 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2366a133e8edce6b8e8243a998897154",
+    "content-hash": "d98fb0457a0f382171f8e56f4d864ec3",
     "packages": [
+        {
+            "name": "avans/oauth-php",
+            "version": "0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Avans/oauth-php.git",
+                "reference": "bbbb739bffe06d3f8b3dbd6aa00042e34dbd8324"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Avans/oauth-php/zipball/bbbb739bffe06d3f8b3dbd6aa00042e34dbd8324",
+                "reference": "bbbb739bffe06d3f8b3dbd6aa00042e34dbd8324",
+                "shasum": ""
+            },
+            "require": {
+                "league/oauth1-client": "^1.7",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Avans\\OAuth\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rik Meijer",
+                    "email": "ha.meijer@avans.nl"
+                }
+            ],
+            "description": "PHP Connector to the Avans Oauth public API",
+            "time": "2017-09-21T13:21:53+00:00"
+        },
         {
             "name": "guzzlehttp/guzzle",
             "version": "6.3.0",

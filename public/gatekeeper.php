@@ -1,10 +1,9 @@
 <?php
 
 require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Avans.php';
 
 /**
- * @var $server \Avans\NamenLeren\Avans
+ * @var $server \Avans\OAuth\Web
  */
 $server = require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'sso.php';
 
