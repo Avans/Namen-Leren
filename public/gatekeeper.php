@@ -20,7 +20,7 @@ if (array_key_exists('token_credentials', $_SESSION)) {
         $_SESSION['user'] = serialize($server->getUserDetails($tokenCredentials));
     }
     $user = unserialize($_SESSION['user']);
-    if ($user->extra['employee'] === false) {
+    if ($user->extra['employee'] !== true) {
         http_response_code(403);
         exit('Forbidden');
     }
