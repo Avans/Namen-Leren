@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d98fb0457a0f382171f8e56f4d864ec3",
+    "content-hash": "c6c9b9464c36b9d7c6aa0c50416220c2",
     "packages": [
         {
             "name": "avans/oauth-php",
-            "version": "0.1",
+            "version": "0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Avans/oauth-php.git",
-                "reference": "bbbb739bffe06d3f8b3dbd6aa00042e34dbd8324"
+                "reference": "824d07232980e52fb4bdad19582aea5520b9d143"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Avans/oauth-php/zipball/bbbb739bffe06d3f8b3dbd6aa00042e34dbd8324",
-                "reference": "bbbb739bffe06d3f8b3dbd6aa00042e34dbd8324",
+                "url": "https://api.github.com/repos/Avans/oauth-php/zipball/824d07232980e52fb4bdad19582aea5520b9d143",
+                "reference": "824d07232980e52fb4bdad19582aea5520b9d143",
                 "shasum": ""
             },
             "require": {
@@ -44,7 +44,7 @@
                 }
             ],
             "description": "PHP Connector to the Avans Oauth public API",
-            "time": "2017-09-21T13:21:53+00:00"
+            "time": "2017-09-27T10:52:48+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

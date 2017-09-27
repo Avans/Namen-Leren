@@ -22,6 +22,9 @@ if (array_key_exists('token_credentials', $_SESSION)) {
     $user = unserialize($_SESSION['user']);
     if ($user->extra['employee'] !== true) {
         http_response_code(403);
+        unset($_SESSION['token_credentials']);
+        unset($_SESSION['user']);
+        session_destroy();
         exit('Forbidden');
     }
 
